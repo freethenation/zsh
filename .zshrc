@@ -13,7 +13,7 @@ compinit
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
-#source ~/.zsh/auto_node_bin.zsh
+source ~/.zsh/auto_node_bin.zsh
 
 #config prompt
 autoload -U colors && colors
