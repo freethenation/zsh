@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 function venv_chpwd() {
     if [ -r $PWD/venv/bin/activate ]; then
-        deactivate &>2 > /dev/null
+        deactivate > /dev/null 2>&1
         source $PWD/venv/bin/activate
     fi
 }
