@@ -10,6 +10,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+#config terminals
+if [ "$COLORTERM" = "gnome-terminal" ]; then
+    export TERM=gnome-256color
+fi
+
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
