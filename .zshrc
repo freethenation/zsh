@@ -28,6 +28,7 @@ fi
 source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
 source ~/.zsh/auto_node_bin.zsh
+source ~/.zsh/ssh_agent.sh
 
 #config prompt
 autoload -U colors && colors
@@ -46,8 +47,4 @@ _git_prompt() {
 
 RPS1="%{$fg[blue]%}ret:%? \$(_git_prompt)%{$reset_color%}"
 
-export ANDROID_HOME="/home/freethenation/bin/android/sdk"
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
-
-export NVM_DIR="/home/freethenation/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export GOPATH=/home/freethenation/gopath
