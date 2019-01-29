@@ -29,6 +29,7 @@ source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
 source ~/.zsh/auto_node_bin.zsh
 source ~/.zsh/ssh_agent.sh
+setxkbmap -layout "us" -option caps:none #no caps lock
 
 #config prompt
 autoload -U colors && colors
