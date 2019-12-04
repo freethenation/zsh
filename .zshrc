@@ -45,6 +45,10 @@ _git_prompt() {
 
 RPS1="%{$fg[blue]%}ret:%? \$(_git_prompt)%{$reset_color%}"
 
+#Fix paths
 fpath=($HOME/.zsh/completions $fpath)
 export GOPATH=/home/freethenation/gopath
 export PATH=$PATH:$HOME/bin:$HOME/.zsh/bin
+
+#alias
+alias curlj='curl -H "Content-Type: application/json"'
