@@ -1,0 +1,64 @@
+#!/bin/bash
+set -e
+
+help()
+{
+    echo "Quickly copies files between two computes using rsync daemon"
+    echo "Usage: frsync SRC DEST"
+    echo "SRC: should be a remote host and path. E.g. root@yourserver.com:~/file.txt"
+    echo "DEST: should be a folder on your local machine"
+    echo "Note: The port 31337 must be open on your local machine. You can change the port by supplying the env variable FRSYNC_PORT."
+    exit 2
+}
+
+#parse args
+if [ "$#" -ne 2 ]; then
+    help
+fi
+SRC="$1"
+DEST="$2"
+if [ ! -d "$DEST" ]; then
+  echo "Error: Destination directory must exist locally. '$DEST' does not exist locally."
+  echo ""
+  help
+fi
+SRC_HOST=$(echo "$SRC" | awk -F: '{print $1}')
+SRC_PATH=$(echo "$SRC" | awk -F: '{print $2}')
+if [[ -z "${SRC_PATH}" ]]; then
+  echo "Error: Source must be a remote host and path. '$SRC' is not valid."
+  echo ""
+  help
+fi
+
+#set required env vars
+DEST=$(cd -- "$DEST" && pwd -P 2>/dev/null || pwd) #convert to abs path
+PORT=${FRSYNC_PORT:-31337}
+PASSWORD_FILE="$(mktemp --suffix '.rsyncd.pass')"
+PASSWORD=$(openssl rand -hex 10)
+CONFIG_FILE="$(mktemp --suffix '.rsyncd.conf')"
+
+#write rsync password file & config
+echo "$USER:$PASSWORD" > "$PASSWORD_FILE"
+chmod 0640 "$PASSWORD_FILE"
+cat <<EOF >  "$CONFIG_FILE"
+[frsync]
+path = $DEST
+auth users = $USER
+secrets file = $PASSWORD_FILE
+read only = no
+list = yes
+use chroot = false
+EOF
+
+#start daemon in background
+trap "kill 0" EXIT
+
+set -o xtrace
+rsync --daemon --port "$PORT" --no-detach -v --config $CONFIG_FILE &
+RSYNC_PID=$!
+
+#transfer
+ssh $SRC_HOST RSYNC_PASSWORD="$PASSWORD" rsync --no-compress --progress -rvt "$SRC_PATH" "rsync://$USER@"'$(echo $SSH_CLIENT | awk '"'"'{print $1}'"'"'):'"$PORT/frsync"
+
+#shutdown
+kill "$RSYNC_PID"
