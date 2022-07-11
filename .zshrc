@@ -53,4 +53,4 @@ export PATH=$PATH:$HOME/bin:$HOME/.zsh/bin
 #alias
 alias curlj='curl -H "Content-Type: application/json"'
 
-type zsh &>/dev/null && source <(kubectl completion zsh)
+#type zsh &>/dev/null && source <(kubectl completion zsh)
