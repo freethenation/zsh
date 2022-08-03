@@ -26,6 +26,7 @@ source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
 source ~/.zsh/auto_node_bin.zsh
 source ~/.zsh/ssh-agent.plugin.zsh
+zstyle :omz:plugins:ssh-agent lazy yes
 if test -f "~/.zsh/local.sh"; then
   source ~/.zsh/local.sh #for settings you never want checked into git
 fi
