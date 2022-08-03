@@ -22,6 +22,8 @@ if [ "$COLORTERM" = "gnome-terminal" ]; then
     export TERM=gnome-256color
 fi
 
+source ~/.zsh/clipboard.zsh
+source ~/.zsh/copybuffer.plugin.zsh
 source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
 source ~/.zsh/auto_node_bin.zsh
