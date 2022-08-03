@@ -11,7 +11,7 @@ bindkey -v
 bindkey '^r' history-incremental-search-backward
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/freethenation/.zshrc'
+zstyle :compinstall filename "/home/$USER/.zshrc"
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -27,7 +27,7 @@ source ~/.zsh/auto_venv.zsh
 source ~/.zsh/auto_node_bin.zsh
 source ~/.zsh/ssh_agent.sh
 if test -f "~/.zsh/local.sh"; then
-  source ~/.zsh/local.sh
+  source ~/.zsh/local.sh #for settings you never want checked into git
 fi
 
 setxkbmap -layout "us" -option caps:none #no caps lock
@@ -51,10 +51,8 @@ RPS1="%{$fg[blue]%}ret:%? \$(_git_prompt)%{$reset_color%}"
 
 #Fix paths
 fpath=($HOME/.zsh/completions $fpath)
-export GOPATH=/home/freethenation/gopath
+export GOPATH=/home/$USER/gopath
 export PATH=$PATH:$HOME/bin:$HOME/.zsh/bin
 
 #alias
 alias curlj='curl -H "Content-Type: application/json"'
-
-#type zsh &>/dev/null && source <(kubectl completion zsh)
