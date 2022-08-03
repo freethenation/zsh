@@ -25,7 +25,7 @@ fi
 source ~/.zsh/ls_colors.zsh
 source ~/.zsh/auto_venv.zsh
 source ~/.zsh/auto_node_bin.zsh
-source ~/.zsh/ssh_agent.sh
+source ~/.zsh/ssh-agent.plugin.zsh
 if test -f "~/.zsh/local.sh"; then
   source ~/.zsh/local.sh #for settings you never want checked into git
 fi
