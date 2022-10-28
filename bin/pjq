@@ -1,2 +1,2 @@
 #!/bin/bash
-cat - |  parallel --ungroup --pipe --roundrobin jq "$@"
+cat - |  parallel --line-buffer --pipe --roundrobin jq "$@"
